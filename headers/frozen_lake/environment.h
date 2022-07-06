@@ -8,7 +8,7 @@ class FrozenLake
     {
 
     private:
-        static void checkIfValidAction(int action);
+        bool checkIfValidAction(int action) const;
 
     public:
         FrozenLake();
@@ -17,7 +17,8 @@ class FrozenLake
         int actionSpace;
         bool isSlippery;
         double transitionProbability;
-        int positionOnGrid;
+        int startingPositionOnGrid;
+        int currentPositionOnGrid;
 
         std::vector<std::vector<std::string>> env;
 

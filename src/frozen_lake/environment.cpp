@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -11,34 +12,30 @@ FrozenLake::FrozenLake()
     actionSpace = 4;
     isSlippery = false;
     transitionProbability = 33.3333;
-    positionOnGrid = 0;
+    startingPositionOnGrid = 0;
+    currentPositionOnGrid = 0;
 
     env = {{"s", "f", "f", "f"},
            {"f", "h", "f", "h"},
            {"f", "f", "f", "h"},
            {"h", "f", "f", "g"}};
+
 };
 
-void FrozenLake::checkIfValidAction(int action)
+bool FrozenLake::checkIfValidAction(int action) const
 {
-    std::cout << action <<" action is valid" << std::endl;
+    if (action == 0)
+    {
+        bool result = (this->currentPositionOnGrid < 4) ? false : true;
+    } else if (action == 1)
+    {
+
+    }
 }
 
 std::tuple<int, double, bool> FrozenLake::step(int action)
 {
-    if (action == 0)
-    {
-        FrozenLake::checkIfValidAction(action);
-    } else if (action == 1)
-    {
-        FrozenLake::checkIfValidAction(action);
-    } else if (action == 2)
-    {
-        FrozenLake::checkIfValidAction(action);
-    } else
-    {
-        FrozenLake::checkIfValidAction(action);
-    }
+    std::cout << checkIfValidAction(action);
 }
 
 FrozenLake::~FrozenLake() = default;
