@@ -2,13 +2,15 @@
 
 #include <tuple>
 #include <vector>
+#include <list>
+#include <set>
 
 
 class FrozenLake
     {
 
     private:
-        bool checkIfValidAction(int action) const;
+        [[nodiscard]] bool checkIfValidAction(int action) const;
 
     public:
         FrozenLake();
@@ -20,9 +22,11 @@ class FrozenLake
         int startingPositionOnGrid;
         int currentPositionOnGrid;
 
+        std::set<int> leftSideIDs;
+        std::set<int> rightSideIDs;
+
         std::vector<std::vector<std::string>> env;
 
-        // 14 0.0 False {'prob': 0.3333333333333333}
         std::tuple<int, double, bool> step(int action);
 
         ~FrozenLake();
