@@ -22,7 +22,8 @@ int main()
 {
     FrozenLake frozenLake;
 
-    printMatrixContent(frozenLake.env);
+//    printMatrixContent(frozenLake.env);
+    frozenLake.step(0);
 
     return 0;
 }
