@@ -1,28 +1,23 @@
 #include <iostream>
 #include <string>
+#include <set>
+
 #include "../headers/frozen_lake/environment.h"
-
-
-void printMatrixContent(std::vector<std::vector<std::string>> inputMatrix)
-{
-    for (int i = 0; i < inputMatrix.size(); i++)
-    {
-        for (int j = 0; j < inputMatrix[0].size(); j++)
-        {
-            std::cout << inputMatrix[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << std::endl;
-}
+#include "../headers/utils/utils.h"
 
 
 int main()
 {
     FrozenLake frozenLake;
+    frozenLake.currentPositionOnGrid = 5;
 
-    printMatrixContent(frozenLake.env);
+    int nextState;
+    double reward;
+    bool isDone;
+
+    std::tie(nextState, reward, isDone) = frozenLake.step(3);
+    printValue(frozenLake.currentPositionOnGrid);
+
 
     return 0;
 }

@@ -7,5 +7,7 @@ add_executable(ReinforcementLearning
 
         src/main.cpp
         src/frozen_lake/environment.cpp
+        src/utils/utils.cpp
 
-        headers/frozen_lake/environment.h)
+        headers/frozen_lake/environment.h
+        headers/utils/utils.h)
