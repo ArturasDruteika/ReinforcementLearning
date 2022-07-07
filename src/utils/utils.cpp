@@ -24,3 +24,7 @@
 {
     std::cout << input << std::endl;
 }
+
+[[maybe_unused]] void printValue(int value){
+    std::cout << value << std::endl;
+}
