@@ -9,11 +9,15 @@
 int main()
 {
     FrozenLake frozenLake;
-    frozenLake.currentPositionOnGrid = 16;
-    frozenLake.step(0);
-    frozenLake.step(1);
-    frozenLake.step(2);
-    frozenLake.step(3);
+    frozenLake.currentPositionOnGrid = 5;
+
+    int nextState;
+    double reward;
+    bool isDone;
+
+    std::tie(nextState, reward, isDone) = frozenLake.step(3);
+    printValue(frozenLake.currentPositionOnGrid);
+
 
     return 0;
 }

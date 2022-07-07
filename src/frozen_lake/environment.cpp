@@ -18,7 +18,7 @@ FrozenLake::FrozenLake()
     currentPositionOnGrid = 0;
 
     leftSideIDs = {0, 4, 8, 12};
-    rightSideIDs = {3, 7, 11, 16};
+    rightSideIDs = {3, 7, 11, 15};
 
     env = {{"s", "f", "f", "f"},
            {"f", "h", "f", "h"},
@@ -31,17 +31,23 @@ bool FrozenLake::checkIfValidAction(int action) const
 {
 
     if (action == 0 && this->currentPositionOnGrid < 4) return false;
-    else if (action == 1 && (std::find(this->leftSideIDs.begin(), this->leftSideIDs.end(), action) == this->leftSideIDs.end())) return false;
+    else if (action == 1 && leftSideIDs.find(this->currentPositionOnGrid) != leftSideIDs.end()) return false;
     else if (action == 2 && this->currentPositionOnGrid > 11) return false;
-    else if (action == 3 && (std::find(this->rightSideIDs.begin(), this->rightSideIDs.end(), action) == this->rightSideIDs.end())) return false;
+    else if (action == 3 && rightSideIDs.find(this->currentPositionOnGrid) != rightSideIDs.end()) return false;
     else return true;
 }
 
 std::tuple<int, double, bool> FrozenLake::step(int action)
 {
-    std::cout << this->checkIfValidAction(action);
+    if (this->checkIfValidAction(action))
+    {
+        if (action == 0) this->currentPositionOnGrid -= 4;
+        else if (action == 1) this->currentPositionOnGrid -= 1;
+        else if (action == 2) this->currentPositionOnGrid += 4;
+        else this->currentPositionOnGrid += 1;
+    }
 
-    return {0, 0.0, true};
+    return std::make_tuple(0, 0.0, true);
 }
 
 FrozenLake::~FrozenLake() = default;
