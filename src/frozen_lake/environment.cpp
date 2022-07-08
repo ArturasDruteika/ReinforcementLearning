@@ -37,8 +37,21 @@ bool FrozenLake::checkIfValidAction(int action) const
     else return true;
 }
 
+double FrozenLake::getReward(int state)
+{
+
+}
+
+bool FrozenLake::checkIfGameEnded(int state)
+{
+
+}
+
 std::tuple<int, double, bool> FrozenLake::step(int action)
 {
+    double reward = 0.0;
+    bool isDone = false;
+
     if (this->checkIfValidAction(action))
     {
         if (action == 0) this->currentPositionOnGrid -= 4;
@@ -47,7 +60,10 @@ std::tuple<int, double, bool> FrozenLake::step(int action)
         else this->currentPositionOnGrid += 1;
     }
 
-    return std::make_tuple(0, 0.0, true);
+    reward - this->getReward(this->currentPositionOnGrid);
+    isDone = this->checkIfGameEnded(this->currentPositionOnGrid);
+
+    return std::make_tuple(this->currentPositionOnGrid, reward, isDone);
 }
 
 FrozenLake::~FrozenLake() = default;

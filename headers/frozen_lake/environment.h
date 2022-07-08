@@ -11,6 +11,8 @@ class FrozenLake
 
     private:
         [[nodiscard]] bool checkIfValidAction(int action) const;
+        double getReward(int state);
+        bool checkIfGameEnded(int state);
 
     public:
         FrozenLake();
