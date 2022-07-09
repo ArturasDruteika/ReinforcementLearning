@@ -8,18 +8,22 @@
 
 int main()
 {
-    FrozenLake frozenLake(false, false);
+    FrozenLake frozenLake(true, false);
 
     int nextState;
     double reward;
     bool isDone;
 
-    std::tie(nextState, reward, isDone) = frozenLake.step(0);
-    std::tie(nextState, reward, isDone) = frozenLake.step(0);
-    std::tie(nextState, reward, isDone) = frozenLake.step(0);
-    std::tie(nextState, reward, isDone) = frozenLake.step(3);
+    frozenLake.currentPositionOnGrid = 5;
 
-    std::cout << frozenLake.currentPositionOnGrid;
+    std::tie(nextState, reward, isDone) = frozenLake.step(0);
+    std::cout << frozenLake.currentPositionOnGrid << std::endl;
+    std::tie(nextState, reward, isDone) = frozenLake.step(1);
+    std::cout << frozenLake.currentPositionOnGrid << std::endl;
+    std::tie(nextState, reward, isDone) = frozenLake.step(2);
+    std::cout << frozenLake.currentPositionOnGrid << std::endl;
+    std::tie(nextState, reward, isDone) = frozenLake.step(3);
+    std::cout << frozenLake.currentPositionOnGrid << std::endl;
 
 
 

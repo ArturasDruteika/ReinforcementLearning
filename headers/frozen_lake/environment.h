@@ -24,12 +24,11 @@ class FrozenLake
     public:
         FrozenLake(bool isSlippery, bool ifShowGame);
 
-        int observationSpace;
-        int actionSpace;
+        std::vector<int> observationSpace;
+        std::vector<int> actionSpace;
         bool isSlippery;
         bool ifShowGame;
         double transitionProbability;
-        int startingPositionOnGrid;
         int currentPositionOnGrid;
         int finalStateID;
 

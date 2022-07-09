@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <list>
+#include <random>
 #include <set>
 
 #include "../../headers/frozen_lake/environment.h"
@@ -10,10 +11,9 @@
 
 FrozenLake::FrozenLake(bool isSlippery = false, bool ifShowGame = false)
 {
-    this->observationSpace = 4;
-    this->actionSpace = 4;
-    this->transitionProbability = 33.3333;
-    this->startingPositionOnGrid = 0;
+    this->observationSpace = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    this->actionSpace = {0, 1, 2, 3};
+    this->transitionProbability = 0.3333;
     this->currentPositionOnGrid = 0;
     this->finalStateID = 15;
     this->isSlippery = isSlippery;
@@ -70,7 +70,21 @@ void FrozenLake::stepWithoutSlipperiness(int action)
 
 void FrozenLake::stepWithSlipperiness(int action)
 {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0, 1.0);
 
+    double transitionProb = dis(gen);
+
+    if (transitionProb <= this->transitionProbability)
+    {
+        this->stepWithoutSlipperiness(action);
+    } else
+    {
+        int randomActionId = std::rand() % this->actionSpace.size();
+        int randomAction = this->actionSpace[randomActionId];
+        this->stepWithoutSlipperiness(randomAction);
+    }
 }
 
 std::tuple<int, double, bool> FrozenLake::step(int action)
@@ -78,14 +92,10 @@ std::tuple<int, double, bool> FrozenLake::step(int action)
     double reward = 0.0;
     bool isDone = false;
 
-    if (this->isSlippery == 0) this->stepWithoutSlipperiness(action);
+    if (not this->isSlippery) this->stepWithoutSlipperiness(action);
     else this->stepWithSlipperiness(action);
 
-
-    if (this->ifShowGame)
-    {
-        this->showGame();
-    }
+    if (this->ifShowGame) this->showGame();
 
     reward = this->getReward();
     isDone = this->checkIfGameEnded();
