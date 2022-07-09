@@ -1,12 +1,13 @@
 #include <algorithm>
 #include <iostream>
-#include <vector>
-#include <string>
 #include <list>
 #include <random>
 #include <set>
+#include <string>
+#include <vector>
 
 #include "../../headers/frozen_lake/environment.h"
+#include "../../headers/utils/utils.h"
 
 
 FrozenLake::FrozenLake(bool isSlippery = false, bool ifShowGame = false)
@@ -18,15 +19,16 @@ FrozenLake::FrozenLake(bool isSlippery = false, bool ifShowGame = false)
     this->finalStateID = 15;
     this->isSlippery = isSlippery;
     this->ifShowGame = ifShowGame;
+    this->agentIcon = "\033[0;34;41m@\033[0m";
 
     this->leftSideIDs = {0, 4, 8, 12};
     this->rightSideIDs = {3, 7, 11, 15};
     this->holeIDs = {5, 7, 11, 12};
 
-    this->env = {{"s", "f", "f", "f"},
-                 {"f", "h", "f", "h"},
-                 {"f", "f", "f", "h"},
-                 {"h", "f", "f", "g"}};
+    this->env = {{"S", "F", "F", "F"},
+                 {"F", "H", "F", "H"},
+                 {"F", "F", "F", "H"},
+                 {"H", "F", "F", "G"}};
 
 }
 
@@ -50,11 +52,6 @@ double FrozenLake::getReward()
 bool FrozenLake::checkIfGameEnded() const
 {
     return (this->currentPositionOnGrid == this->finalStateID || this->holeIDs.find(this->currentPositionOnGrid) != this->holeIDs.end());
-}
-
-[[maybe_unused]] void FrozenLake::showGame()
-{
-
 }
 
 void FrozenLake::stepWithoutSlipperiness(int action)
@@ -85,6 +82,24 @@ void FrozenLake::stepWithSlipperiness(int action)
         int randomAction = this->actionSpace[randomActionId];
         this->stepWithoutSlipperiness(randomAction);
     }
+}
+
+void FrozenLake::refreshEnvValues()
+{
+    this->env = {{"S", "F", "F", "F"},
+                 {"F", "H", "F", "H"},
+                 {"F", "F", "F", "H"},
+                 {"H", "F", "F", "G"}};
+}
+
+[[maybe_unused]] void FrozenLake::showGame()
+{
+    int row = this->currentPositionOnGrid / this->env.size();
+    int col = this->currentPositionOnGrid % this->env[0].size();
+
+    this->refreshEnvValues();
+    this->env[row][col] = this->agentIcon;
+    printMatrixContent(this->env);
 }
 
 std::tuple<int, double, bool> FrozenLake::step(int action)

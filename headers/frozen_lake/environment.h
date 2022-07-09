@@ -1,44 +1,47 @@
 #pragma once
 
-#include <tuple>
-#include <vector>
 #include <list>
 #include <set>
+#include <tuple>
+#include <vector>
 
 
 class FrozenLake
-    {
+{
 
-    private:
-        double getReward();
+private:
+    double getReward();
 
-        [[nodiscard]] bool checkIfValidAction(int action) const;
+    [[nodiscard]] bool checkIfValidAction(int action) const;
 
-        [[nodiscard]] bool checkIfGameEnded() const;
+    [[nodiscard]] bool checkIfGameEnded() const;
 
-        [[maybe_unused]] void showGame();
+    [[maybe_unused]] void showGame();
 
-        void stepWithoutSlipperiness(int action);
-        void stepWithSlipperiness(int action);
+    void stepWithoutSlipperiness(int action);
 
-    public:
-        FrozenLake(bool isSlippery, bool ifShowGame);
+    void stepWithSlipperiness(int action);
 
-        std::vector<int> observationSpace;
-        std::vector<int> actionSpace;
-        bool isSlippery;
-        bool ifShowGame;
-        double transitionProbability;
-        int currentPositionOnGrid;
-        int finalStateID;
+    void refreshEnvValues();
 
-        std::set<int> leftSideIDs;
-        std::set<int> rightSideIDs;
-        std::set<int> holeIDs;
+public:
+    FrozenLake(bool isSlippery, bool ifShowGame);
 
-        std::vector<std::vector<std::string>> env;
+    bool isSlippery;
+    bool ifShowGame;
+    double transitionProbability;
+    int currentPositionOnGrid;
+    int finalStateID;
+    std::string agentIcon;
 
-        std::tuple<int, double, bool> step(int action);
+    std::set<int> leftSideIDs;
+    std::set<int> rightSideIDs;
+    std::set<int> holeIDs;
+    std::vector<int> observationSpace;
+    std::vector<int> actionSpace;
+    std::vector<std::vector<std::string>> env;
 
-        ~FrozenLake();
-    };
+    std::tuple<int, double, bool> step(int action);
+
+    ~FrozenLake();
+};
