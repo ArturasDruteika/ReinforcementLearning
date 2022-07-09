@@ -10,16 +10,24 @@ class FrozenLake
     {
 
     private:
-        [[nodiscard]] bool checkIfValidAction(int action) const;
         double getReward();
+
+        [[nodiscard]] bool checkIfValidAction(int action) const;
+
         [[nodiscard]] bool checkIfGameEnded() const;
 
+        [[maybe_unused]] void showGame();
+
+        void stepWithoutSlipperiness(int action);
+        void stepWithSlipperiness(int action);
+
     public:
-        FrozenLake();
+        FrozenLake(bool isSlippery, bool ifShowGame);
 
         int observationSpace;
         int actionSpace;
         bool isSlippery;
+        bool ifShowGame;
         double transitionProbability;
         int startingPositionOnGrid;
         int currentPositionOnGrid;
