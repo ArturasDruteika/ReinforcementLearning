@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#include "../../headers/frozen_lake/environment.h"
-#include "../../headers/utils/utils.h"
+#include "../../../headers/environments/frozen_lake/environment.h"
+#include "../../../headers/utils/utils.h"
 
 
 FrozenLake::FrozenLake(bool isSlippery = false, bool ifShowGame = false)

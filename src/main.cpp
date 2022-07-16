@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../headers/frozen_lake/environment.h"
+#include "../headers/environments/frozen_lake/environment.h"
 
 
 int main()
