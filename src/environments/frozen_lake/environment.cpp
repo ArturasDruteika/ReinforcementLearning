@@ -10,7 +10,7 @@
 #include "../../../headers/utils/utils.h"
 
 
-FrozenLake::FrozenLake(bool isSlippery = false, bool ifShowGame = false)
+FrozenLake::FrozenLake(bool isSlippery, bool ifShowGame)
 {
     this->observationSpace = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     this->actionSpace = {0, 1, 2, 3};

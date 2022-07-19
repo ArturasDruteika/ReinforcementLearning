@@ -25,7 +25,7 @@ private:
     void refreshEnvValues();
 
 public:
-    FrozenLake(bool isSlippery, bool ifShowGame);
+    explicit FrozenLake(bool isSlippery = false, bool ifShowGame = false);
 
     bool isSlippery;
     bool ifShowGame;
