@@ -1,6 +1,8 @@
 #include <vector>
+#include <random>
 
 #include "../../../headers/algorithms/frozen_lake/q_learning_frozen_lake.h"
+#include "../../../headers/utils/utils.h"
 
 
 std::vector<std::vector<double>> initializeQTable(const std::vector<int> &inputShape)
@@ -17,4 +19,16 @@ std::vector<std::vector<double>> initializeQTable(const std::vector<int> &inputS
     }
 
     return qTable;
+}
+
+
+int chooseAction(const std::vector<double> &actionValues, double explorationRate)
+{
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+    std::mt19937 generate = generator();
+    double explorationRateThreshold = dis(generate);
+    std::cout << explorationRateThreshold << std::endl;
+
+    if (explorationRateThreshold >= explorationRate) return getArgMax(actionValues);
+    else return (int) *select_randomly(actionValues.begin(), actionValues.end());
 }
