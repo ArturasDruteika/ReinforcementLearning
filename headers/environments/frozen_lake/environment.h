@@ -4,6 +4,7 @@
 #include <set>
 #include <tuple>
 #include <vector>
+#include <string>
 
 
 class FrozenLake

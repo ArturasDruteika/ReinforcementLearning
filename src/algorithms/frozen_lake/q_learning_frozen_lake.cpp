@@ -1,5 +1,6 @@
 #include <vector>
 #include <random>
+#include <cmath>
 
 #include "../../../headers/algorithms/frozen_lake/q_learning_frozen_lake.h"
 #include "../../../headers/utils/utils.h"
@@ -27,8 +28,19 @@ int chooseAction(const std::vector<double> &actionValues, double explorationRate
     std::uniform_real_distribution<> dis(0.0, 1.0);
     std::mt19937 generate = generator();
     double explorationRateThreshold = dis(generate);
-    std::cout << explorationRateThreshold << std::endl;
 
-    if (explorationRateThreshold >= explorationRate) return getArgMax(actionValues);
-    else return (int) *select_randomly(actionValues.begin(), actionValues.end());
+    if (explorationRateThreshold >= explorationRate)
+    {
+        return getArgMax(actionValues);
+    } else
+    {
+        int rangeSize = (int) (actionValues.size());
+        int randomIndex = std::rand() % rangeSize;
+        return randomIndex;
+    }
+}
+
+double updateExplorationRate(double minExplorationRate, double maxExplorationRate, double explorationRateDecay, int episode)
+{
+    return minExplorationRate + (maxExplorationRate - minExplorationRate) * std::exp(-explorationRateDecay * episode);
 }

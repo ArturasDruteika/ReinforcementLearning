@@ -78,7 +78,7 @@ void FrozenLake::stepWithSlipperiness(int action)
         this->stepWithoutSlipperiness(action);
     } else
     {
-        int randomActionId = std::rand() % this->actionSpace.size();
+        int randomActionId = (int) (std::rand() % this->actionSpace.size());
         int randomAction = this->actionSpace[randomActionId];
         this->stepWithoutSlipperiness(randomAction);
     }
@@ -94,8 +94,8 @@ void FrozenLake::refreshEnvValues()
 
 [[maybe_unused]] void FrozenLake::showGame()
 {
-    int row = this->currentPositionOnGrid / this->env.size();
-    int col = this->currentPositionOnGrid % this->env[0].size();
+    int row = (int) (this->currentPositionOnGrid / this->env.size());
+    int col = (int) (this->currentPositionOnGrid % this->env[0].size());
 
     this->refreshEnvValues();
     this->env[row][col] = this->agentIcon;
