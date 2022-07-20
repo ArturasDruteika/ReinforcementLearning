@@ -10,8 +10,11 @@ void learn()
 {
     FrozenLake frozenLake(false, true);
 
-    std::vector<int> inputShape = {(int) frozenLake.env.size(), (int) frozenLake.env[0].size()};
+    int nStates = frozenLake.env.size() * frozenLake.env[0].size();
+    std::vector<int> inputShape = {nStates, (int) frozenLake.env[0].size()};
     std::vector<std::vector<double>> qTable = initializeQTable(inputShape);
+    print(qTable.size());
+    print(qTable[0].size());
 
     int maxStepsPerEpisode = 100;
     int nEpisodes = 10;
@@ -35,8 +38,7 @@ void learn()
             int action = chooseAction(qTable[state], 0.5);
             std::tie(nextState, reward, done) = frozenLake.step(action);
             auto maxValue = std::max_element(std::begin(qTable[nextState]), std::end(qTable[nextState]));
-            qTable[state][action] = qTable[state][action] + learningRate * (reward + gamma * (*maxValue) - qTable[state][action]);
-            state = nextState;
+            qTable[state][action] = qTable[state][action] + learningRate * (reward + gamma * *maxValue - qTable[state][action]);
 
             if (done) break;
 
