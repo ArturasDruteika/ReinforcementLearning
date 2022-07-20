@@ -13,8 +13,6 @@ void learn()
     int nStates = frozenLake.env.size() * frozenLake.env[0].size();
     std::vector<int> inputShape = {nStates, (int) frozenLake.env[0].size()};
     std::vector<std::vector<double>> qTable = initializeQTable(inputShape);
-    print(qTable.size());
-    print(qTable[0].size());
 
     int maxStepsPerEpisode = 100;
     int nEpisodes = 10;
