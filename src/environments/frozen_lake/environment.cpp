@@ -6,11 +6,11 @@
 #include <string>
 #include <vector>
 
-#include "../../headers/frozen_lake/environment.h"
-#include "../../headers/utils/utils.h"
+#include "../../../headers/environments/frozen_lake/environment.h"
+#include "../../../headers/utils/utils.h"
 
 
-FrozenLake::FrozenLake(bool isSlippery = false, bool ifShowGame = false)
+FrozenLake::FrozenLake(bool isSlippery, bool ifShowGame)
 {
     this->observationSpace = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     this->actionSpace = {0, 1, 2, 3};
@@ -78,7 +78,7 @@ void FrozenLake::stepWithSlipperiness(int action)
         this->stepWithoutSlipperiness(action);
     } else
     {
-        int randomActionId = std::rand() % this->actionSpace.size();
+        int randomActionId = (int) (std::rand() % this->actionSpace.size());
         int randomAction = this->actionSpace[randomActionId];
         this->stepWithoutSlipperiness(randomAction);
     }
@@ -94,8 +94,8 @@ void FrozenLake::refreshEnvValues()
 
 [[maybe_unused]] void FrozenLake::showGame()
 {
-    int row = this->currentPositionOnGrid / this->env.size();
-    int col = this->currentPositionOnGrid % this->env[0].size();
+    int row = (int) (this->currentPositionOnGrid / this->env.size());
+    int col = (int) (this->currentPositionOnGrid % this->env[0].size());
 
     this->refreshEnvValues();
     this->env[row][col] = this->agentIcon;
@@ -116,6 +116,12 @@ std::tuple<int, double, bool> FrozenLake::step(int action)
     isDone = this->checkIfGameEnded();
 
     return std::make_tuple(this->currentPositionOnGrid, reward, isDone);
+}
+
+
+void FrozenLake::reset()
+{
+    this->currentPositionOnGrid = 0;
 }
 
 FrozenLake::~FrozenLake() = default;

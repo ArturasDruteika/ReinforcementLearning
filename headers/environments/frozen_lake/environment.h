@@ -4,6 +4,7 @@
 #include <set>
 #include <tuple>
 #include <vector>
+#include <string>
 
 
 class FrozenLake
@@ -25,7 +26,7 @@ private:
     void refreshEnvValues();
 
 public:
-    FrozenLake(bool isSlippery, bool ifShowGame);
+    explicit FrozenLake(bool isSlippery = false, bool ifShowGame = false);
 
     bool isSlippery;
     bool ifShowGame;
@@ -42,6 +43,8 @@ public:
     std::vector<std::vector<std::string>> env;
 
     std::tuple<int, double, bool> step(int action);
+
+    void reset();
 
     ~FrozenLake();
 };
