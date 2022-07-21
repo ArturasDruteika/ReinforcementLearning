@@ -1,9 +1,6 @@
 #include <algorithm>
 #include <iostream>
-#include <list>
 #include <random>
-#include <set>
-#include <string>
 #include <vector>
 
 #include "../../../headers/environments/frozen_lake/environment.h"
