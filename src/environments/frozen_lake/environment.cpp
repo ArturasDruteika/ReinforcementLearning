@@ -118,4 +118,10 @@ std::tuple<int, double, bool> FrozenLake::step(int action)
     return std::make_tuple(this->currentPositionOnGrid, reward, isDone);
 }
 
+
+void FrozenLake::reset()
+{
+    this->currentPositionOnGrid = 0;
+}
+
 FrozenLake::~FrozenLake() = default;

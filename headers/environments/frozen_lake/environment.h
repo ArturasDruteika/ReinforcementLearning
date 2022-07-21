@@ -44,5 +44,7 @@ public:
 
     std::tuple<int, double, bool> step(int action);
 
+    void reset();
+
     ~FrozenLake();
 };
