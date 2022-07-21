@@ -72,35 +72,15 @@ void learn()
             total_rewards = 0;
         }
 
-//        print("Episode: " + std::to_string(episode + 1) + " finished");
-
         frozenLake.reset();
 
     }
 }
 
 
-void increment(int &value)
-{
-    value++;
-}
-
-
 int main()
 {
-//    int a = 3;
-//    int* b = &a;
-//
-//    *b = 10;
-//    print(a);
-//    increment(a);
-//    print(a);
-
-
-//    Pasiziurek del to kaip agentas juda per enva, nes dabar kartais episode prasideda ne nuo startines pozicijos, bet nuo 0
-
     learn();
-
 
     return 0;
 }
